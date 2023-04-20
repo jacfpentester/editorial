@@ -1,16 +1,12 @@
 import { IsIn, IsNumber, IsString, MaxLength, MinLength } from "class-validator";
 
-export class CreateEmpleadoDto {
+export class CreatePeriodistaDto {
 
     @IsString()
     id: string;
     
- //FK de sucursal   
     @IsString()
-    codigo: string;
-
-    @IsString()
-    nif:string;
+    especialidad:string;
 
     @IsString()
     nombre:string;
@@ -23,4 +19,5 @@ export class CreateEmpleadoDto {
 
     @IsNumber()
     telefono:number;
+ 
 }

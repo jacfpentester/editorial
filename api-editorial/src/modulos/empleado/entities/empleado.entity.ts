@@ -24,8 +24,7 @@ export class Empleado {
 
     @ManyToOne(
         () => Sucursal,
-        (Sucursal) => Sucursal.empleadorel,
-        { cascade: false  }
+        (Sucursal) => Sucursal.empleadorel
     )
-    sucursalrel?: Sucursal;
+    sucursalrel: Sucursal;
 }

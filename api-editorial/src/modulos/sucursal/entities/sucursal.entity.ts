@@ -4,28 +4,28 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedCo
 @Entity('Sucursales')
 export class Sucursal {
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     codigo:string;
 
-    @Column('text', { unique: true })
-    nif: string;
+    @Column('text')
+    direccion: string;
+
+    @Column('text')
+    ciudad: string;
+
+    @Column('text')
+    provincia: string;
 
     @Column('text')
     nombre: string;
 
-    @Column('text')
-    apellido1: string;
-
-    @Column('text')
-    apellido2: string;
-
     @Column('integer')
     telefono: number;
 
-    @ManyToOne(
+    @OneToMany(
         () => Empleado,
         (Empleado) => Empleado.sucursalrel,
         { cascade: false  }
     )
-    empleadorel?: Empleado;
+    empleadorel?: Empleado[];
 }
