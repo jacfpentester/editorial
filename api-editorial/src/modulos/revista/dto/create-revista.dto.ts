@@ -4,6 +4,9 @@ export class CreateRevistaDto {
 
     @IsNumber()
     regnum:number;
+    
+    @IsString()
+    id: string;
 
     @IsString()
     titulo:string;

@@ -1,11 +1,12 @@
 import { Revista } from "../../revista/entities/revista.entity";
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('Periodistas')
 export class Periodista{
 
     @PrimaryColumn()
     id:string;
+
 
     @Column('text')
     especialidad: string;
@@ -24,6 +25,6 @@ export class Periodista{
 
     @ManyToMany(
     () => Revista, 
-    (Revista) => Revista.periodistarel)
-    revistarel?: Revista[];
+    (revista) => revista.periodistarel)
+    revistarel: Revista[];
 }

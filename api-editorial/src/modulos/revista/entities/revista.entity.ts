@@ -6,7 +6,7 @@ import { Periodista } from "../../periodista/entities/periodista.entity";
 @Entity('Revistas')
 export class Revista {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryColumn()
     regnum:number;
 
     @Column('text')
@@ -35,7 +35,15 @@ export class Revista {
 
     @ManyToMany(
     () => Periodista,
-    (Periodista) => Periodista.revistarel)
-    @JoinTable()
-    periodistarel?: Periodista[];
+    (periodista) => periodista.revistarel)
+    @JoinTable({
+        name: 'revista_periodista',
+        joinColumn: {
+            name: 'revista_id',
+        },
+        inverseJoinColumn: {
+            name: 'periodista_id',
+        },
+    })
+    periodistarel: Periodista[];
 }

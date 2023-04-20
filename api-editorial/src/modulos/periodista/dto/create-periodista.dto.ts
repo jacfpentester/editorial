@@ -4,6 +4,9 @@ export class CreatePeriodistaDto {
 
     @IsString()
     id: string;
+
+    @IsNumber()
+    regnum:number;
     
     @IsString()
     especialidad:string;
