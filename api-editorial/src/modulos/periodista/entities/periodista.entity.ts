@@ -4,9 +4,8 @@ import { Column, Entity, JoinColumn, JoinTable, ManyToMany, PrimaryColumn, Prima
 @Entity('Periodistas')
 export class Periodista{
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn('uuid')
     id:string;
-
 
     @Column('text')
     especialidad: string;
@@ -23,8 +22,9 @@ export class Periodista{
     @Column('integer')
     telefono: number;
 
-    @ManyToMany(
-    () => Revista, 
-    (revista) => revista.periodistarel)
-    revistarel: Revista[];
+//     @ManyToMany(
+//     () => Revista, 
+//     (revista) => revista.periodistarel,
+//     {  onDelete: 'CASCADE' } )
+//     revistarel: Revista[];
 }

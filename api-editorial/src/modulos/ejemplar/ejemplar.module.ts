@@ -12,9 +12,9 @@ import { RevistaModule } from '../revista/revista.module';
   imports: [
     ConfigModule,
     RevistaModule,
-    TypeOrmModule.forFeature([ Ejemplar])
+    TypeOrmModule.forFeature([Ejemplar])
   ],
   exports: [ EjemplarService,
-             TypeOrmModule ]
+              TypeOrmModule ]
 })
 export class EjemplarModule {}

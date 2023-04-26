@@ -15,7 +15,23 @@ services:
     networks: 
        net_api_editorial:
            ipv4_address: ${DB_HOST}
-
+  pgAdmin:
+    image: dpage/pgadmin4
+    container_name: pgAdminPostgres
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
+    ports:
+      - 8080:80
+    volumes:
+      - /var/lib/pgadmin
+    depends_on:
+      - dbpostgres
+    networks: 
+       net_api_editorial:
+           ipv4_address: 172.200.10.23
 networks: 
   net_api_editorial:
     ipam: 

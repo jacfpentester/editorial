@@ -18,21 +18,22 @@ export class SeccionService {
  
   async create(createSeccionDto: CreateSeccionDto) {
     try {
-      const { regnum, ...data } = createSeccionDto;
-      const seccion = this.seccionRepository.create({ ...data });
-      seccion.revistarel = await this.revistaService.getId(regnum);
+      const { revista_id, ...campos } = createSeccionDto; 
+      const seccion = this.seccionRepository.create({ ...campos});
+      seccion.revistarel = await this.revistaService.findOne(revista_id);
       await this.seccionRepository.save(seccion);
-      return seccion
+      return seccion;
+      
     }catch (error) {
       this.handleDBErrors(error)
     }
   }
 
 
-  getId(titulo: string) {
+  getId(id: string) {
     return this.seccionRepository.findOne({
       where: { 
-        titulo
+        id
       }
     });
   }

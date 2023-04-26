@@ -4,11 +4,9 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, Primar
 @Entity('Ejemplares')
 export class Ejemplar {
 
+
     @PrimaryColumn()
     id:string;
-
-    @Column('text')
-    fecha: string;
 
     @Column('integer')
     numejemplares: number;
@@ -16,9 +14,16 @@ export class Ejemplar {
     @Column('integer')
     numpaginas: number;
 
+    @Column('text')
+    fecha: string;   
+
     @ManyToOne(
         () => Revista,
-        (Revista) => Revista.ejemplarrel
-    )
-    revistarel: Revista;
+        (revista) => revista.ejemplarrel,
+        { cascade: false, nullable: false  }
+        )
+        @JoinColumn({ name: 'revista_id'})
+        revistarel?: Revista;
+  //ejemplar: Revista;
+
 }

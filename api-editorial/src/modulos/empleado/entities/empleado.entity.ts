@@ -1,5 +1,6 @@
+import { IsNotEmpty } from "class-validator";
 import { Sucursal} from "../../sucursal/entities/sucursal.entity";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('Empleados')
 export class Empleado {
@@ -22,9 +23,12 @@ export class Empleado {
     @Column('integer')
     telefono: number;
 
+
     @ManyToOne(
         () => Sucursal,
-        (Sucursal) => Sucursal.empleadorel
+        (Sucursal) => Sucursal.empleadorel,
+        { cascade: false, nullable: false  }
     )
+    @JoinColumn({ name: 'sucursal_id'})
     sucursalrel: Sucursal;
 }

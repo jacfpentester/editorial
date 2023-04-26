@@ -5,17 +5,17 @@ export class CreateEjemplarDto {
     @IsString()
     id: string;
 
-//FK de Revista
     @IsNumber()
-    regnum: number;
-    
-    @IsNumber()
-    numpaginas: number;
+    numejemplares: number; 
 
     @IsNumber()
-    numejemplares: number;
+    numpaginas: number;
 
 // Retocar para que sea tipo date
     @IsString()
     fecha:string;
+
+
+    @IsNumber()
+    revista_id?: number;
 }

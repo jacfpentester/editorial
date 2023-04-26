@@ -4,18 +4,23 @@ import { UpdateRevistaDto } from './dto/update-revista.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Revista} from './entities/revista.entity';
+import { Periodista } from '../periodista/entities/periodista.entity';
+import { SeccionService } from '../seccion/seccion.service';
+import { EjemplarService } from '../ejemplar/ejemplar.service';
 
 @Injectable()
 export class RevistaService {
 
   constructor(
     @InjectRepository(Revista)
-    private readonly revistaRepository: Repository<Revista>,
-  ) {}
+    private readonly revistaRepository: Repository<Revista>
+    ) {}
 
   async create(createRevistaDto: CreateRevistaDto) {
     try {
-      const revista = this.revistaRepository.create(createRevistaDto);
+      const { ...campos } = createRevistaDto;
+      const revista = this.revistaRepository.create({
+        ...campos});
       await this.revistaRepository.save(revista);
       return (revista);
       
@@ -23,6 +28,18 @@ export class RevistaService {
       console.log(error);
       throw new InternalServerErrorException('Error!')
     }
+  }
+
+  findOne(regnum: number) {
+    return this.revistaRepository.findOne({
+      where: { 
+        regnum
+      },
+      relations: {
+          seccionrel: true,
+          ejemplarrel: true,
+      }
+    });
   }
 
   getId(regnum: number) {

@@ -2,11 +2,11 @@ import { IsIn, IsNumber, IsString, MaxLength, MinLength } from "class-validator"
 
 export class CreatePeriodistaDto {
 
-    @IsString()
-    id: string;
+    // @IsString()
+    // id: string;
 
-    @IsNumber()
-    regnum:number;
+    // @IsNumber()
+    // regnum:number;
     
     @IsString()
     especialidad:string;

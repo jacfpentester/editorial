@@ -6,14 +6,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Seccion } from './entities/seccion.entity';
 import { RevistaModule } from '../revista/revista.module';
 
-
 @Module({
   controllers: [SeccionController],
   providers: [SeccionService],
   imports: [
     ConfigModule,
     RevistaModule,
-    TypeOrmModule.forFeature([ Seccion])
+    TypeOrmModule.forFeature([Seccion])
   ],
   exports: [ SeccionService,
              TypeOrmModule ]

@@ -1,11 +1,12 @@
-import { IsIn, IsNumber, IsString, MaxLength, MinLength } from "class-validator";
+import { IsIn, IsNotEmpty, IsNumber, IsString, MaxLength, MinLength } from "class-validator";
 
 export class CreateEmpleadoDto {
 
     @IsString()
     id: string;
     
- //FK de sucursal   
+ //FK de sucursal 
+    @IsNotEmpty()
     @IsString()
     codigo: string;
 

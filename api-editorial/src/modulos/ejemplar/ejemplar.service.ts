@@ -17,12 +17,13 @@ export class EjemplarService {
 
  
   async create(createEjemplarDto: CreateEjemplarDto) {
-    try {
-      const { regnum, ...data } = createEjemplarDto;
-      const ejemplar = this.ejemplarRepository.create({ ...data });
-      ejemplar.revistarel = await this.revistaService.getId(regnum);
+    try { 
+      const { revista_id, ...campos } = createEjemplarDto; 
+      const ejemplar = this.ejemplarRepository.create({ ...campos});
+      ejemplar.revistarel = await this.revistaService.findOne(revista_id);
       await this.ejemplarRepository.save(ejemplar);
-      return ejemplar
+      return ejemplar;
+      
     }catch (error) {
       this.handleDBErrors(error)
     }

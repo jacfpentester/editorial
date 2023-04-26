@@ -1,18 +1,26 @@
 import { Revista } from "../../revista/entities/revista.entity";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('Secciones')
 export class Seccion {
 
     @PrimaryColumn()
-    titulo:string;
+    id: string;
+
+    @Column('text')
+    titulo: string;
 
     @Column('text')
     extension: string;
 
+    
     @ManyToOne(
         () => Revista,
-        (Revista) => Revista.seccionrel
+        (revista) => revista.seccionrel,
+        { cascade: false, nullable: false  }
     )
-    revistarel: Revista;
+    @JoinColumn({ name: 'revista_id'
+})
+    revistarel?: Revista;
+
 }

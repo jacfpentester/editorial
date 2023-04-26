@@ -6,7 +6,7 @@ import { Periodista } from "../../periodista/entities/periodista.entity";
 @Entity('Revistas')
 export class Revista {
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     regnum:number;
 
     @Column('text')
@@ -21,29 +21,30 @@ export class Revista {
 
     @OneToMany(
         () => Ejemplar,
-        (Ejemplar) => Ejemplar.revistarel,
-        { cascade: true  }
+        (ejemplar) => ejemplar.revistarel,
+        { cascade: false  }
     )
-    ejemplarrel?: Ejemplar[];
+    ejemplarrel: Ejemplar[];
 
     @OneToMany(
         () => Seccion,
-        (Seccion) => Seccion.revistarel,
-        { cascade: true  }
+        (seccion) => seccion.revistarel,
+        { cascade: false }
     )
-    seccionrel?: Seccion[];
+    seccionrel: Seccion[];
 
-    @ManyToMany(
-    () => Periodista,
-    (periodista) => periodista.revistarel)
-    @JoinTable({
-        name: 'revista_periodista',
-        joinColumn: {
-            name: 'revista_id',
-        },
-        inverseJoinColumn: {
-            name: 'periodista_id',
-        },
-    })
-    periodistarel: Periodista[];
+    // @ManyToMany(
+    // () => Periodista,
+    // (periodista) => periodista.revistarel)
+    // // @JoinTable({
+    // //     name: 'revista_periodista',
+    // //     joinColumn: {
+    // //         name: 'revista_id',
+    // //     },
+    // //     inverseJoinColumn: {
+    // //         name: 'periodista_id',
+    // //     },
+    // // })
+    // @JoinTable()
+    // periodistarel?: Periodista[];
 }
