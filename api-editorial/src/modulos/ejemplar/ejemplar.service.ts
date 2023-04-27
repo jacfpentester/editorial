@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, InternalServerErrorException } from '@
 import { CreateEjemplarDto } from './dto/create-ejemplar.dto';
 import { UpdateEjemplarDto } from './dto/update-ejemplar.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Ejemplar} from './entities/ejemplar.entity';
 import { RevistaService } from '../revista/revista.service';
 
@@ -10,6 +10,7 @@ import { RevistaService } from '../revista/revista.service';
 export class EjemplarService {
 
   constructor(
+    private readonly dataSource: DataSource,
     @InjectRepository(Ejemplar)
     private readonly ejemplarRepository: Repository<Ejemplar>,
     private readonly revistaService: RevistaService,

@@ -3,12 +3,12 @@ import { IsArray, IsIn, IsNumber, IsOptional, IsString, MaxLength, MinLength } f
 export class CreateRevistaDto {
 
      @IsNumber()
-     regnum:number;
+     id:number;
     
-    @IsArray()
-    @IsString({ each: true })
-    @IsOptional()
-    periodistarel?: string[];
+    // @IsArray()
+    // @IsString({ each: true })
+    // @IsOptional()
+    // periodistarel?: string[];
 
     // @IsArray()
     // @IsString({ each: true })
@@ -27,7 +27,10 @@ export class CreateRevistaDto {
     tipo:string;
 
     @IsString()
-    periodicidad:string;  
+    periodicidad:string; 
+
+    @IsString()
+    periodista_id:number; 
 
     
     // @IsString()

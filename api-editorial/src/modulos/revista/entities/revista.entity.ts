@@ -7,7 +7,7 @@ import { Periodista } from "../../periodista/entities/periodista.entity";
 export class Revista {
 
     @PrimaryGeneratedColumn()
-    regnum:number;
+    id:number;
 
     @Column('text')
     titulo: string;
@@ -37,15 +37,14 @@ export class Revista {
     () => Periodista,
     (periodista) => periodista.revistarel,
     { cascade: true, eager: true  } )
-    // @JoinTable({
-    //     name: 'revista_periodista',
-    //     joinColumn: {
-    //         name: 'revista_id',
+    @JoinTable({
+        name: 'revista_periodista',
+         joinColumn: {
+         name: 'periodista_id'
     //     },
     //     inverseJoinColumn: {
-    //         name: 'periodista_id',
-    //     },
-    // })
-    @JoinTable()
-    periodistarel?: Periodista[];
+    //         name: 'periodista_id'
+         }
+     })
+    periodistarel: Periodista[];
 }

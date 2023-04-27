@@ -2,13 +2,14 @@ import { BadRequestException, Injectable, InternalServerErrorException } from '@
 import { CreateSucursalDto } from './dto/create-sucursal.dto';
 import { UpdateSucursalDto } from './dto/update-sucursal.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Sucursal} from './entities/sucursal.entity';
 
 @Injectable()
 export class SucursalService {
 
   constructor(
+    private readonly dataSource: DataSource,
     @InjectRepository(Sucursal)
     private readonly sucursalRepository: Repository<Sucursal>,
   ) {}

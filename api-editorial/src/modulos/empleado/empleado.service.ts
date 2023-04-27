@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, InternalServerErrorException } from '@
 import { CreateEmpleadoDto } from './dto/create-empleado.dto';
 import { UpdateEmpleadoDto } from './dto/update-empleado.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Empleado} from './entities/empleado.entity';
 import { SucursalService } from '../sucursal/sucursal.service';
 
@@ -10,6 +10,7 @@ import { SucursalService } from '../sucursal/sucursal.service';
 export class EmpleadoService {
 
   constructor(
+    private readonly dataSource: DataSource,
     @InjectRepository(Empleado)
     private readonly empleadoRepository: Repository<Empleado>,
     private readonly sucursalService: SucursalService,

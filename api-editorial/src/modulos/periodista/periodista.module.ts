@@ -13,7 +13,7 @@ import { Revista } from '../revista/entities/revista.entity';
   imports: [
     ConfigModule,
     RevistaModule,
-    TypeOrmModule.forFeature([ Periodista, Revista])
+    TypeOrmModule.forFeature([ Periodista ])
   ],
   exports: [ PeriodistaService,
              TypeOrmModule ]

@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, InternalServerErrorException } from '@
 import { CreatePeriodistaDto } from './dto/create-periodista.dto';
 import { UpdatePeriodistaDto } from './dto/update-periodista.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Periodista} from './entities/periodista.entity';
 import { RevistaService } from '../revista/revista.service';
 
@@ -10,6 +10,7 @@ import { RevistaService } from '../revista/revista.service';
 export class PeriodistaService {
 
   constructor(
+    private readonly dataSource: DataSource,
     @InjectRepository(Periodista)
     private readonly periodistaRepository: Repository<Periodista>,
     private readonly revistaService: RevistaService,
@@ -18,9 +19,9 @@ export class PeriodistaService {
  
   async create(createPeriodistaDto: CreatePeriodistaDto) {
     try {
-      const { regnum, ...data } = createPeriodistaDto;
+      const { ...data } = createPeriodistaDto;
       const periodista = this.periodistaRepository.create({ ...data });
-      periodista.revistarel = await this.revistaService.getRevistaId(regnum);
+      //periodista.id = await this.revistaService.getRevistaId(id);
       await this.periodistaRepository.save(periodista);
       return (periodista);
       // const periodista = this.periodistaRepository.create(createPeriodistaDto);
@@ -32,7 +33,7 @@ export class PeriodistaService {
   }
 
 
-  getId(id: string) {
+  getId(id: number) {
     return this.periodistaRepository.findOne({
       where: { 
         id

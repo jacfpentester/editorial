@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, InternalServerErrorException } from '@
 import { CreateSeccionDto } from './dto/create-seccion.dto';
 import { UpdateSeccionDto } from './dto/update-seccion.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Seccion} from './entities/seccion.entity';
 import { RevistaService } from '../revista/revista.service';
 
@@ -10,6 +10,7 @@ import { RevistaService } from '../revista/revista.service';
 export class SeccionService {
 
   constructor(
+    private readonly dataSource: DataSource,
     @InjectRepository(Seccion)
     private readonly seccionRepository: Repository<Seccion>,
     private readonly revistaService: RevistaService,

@@ -15,7 +15,7 @@ import { Ejemplar } from '../ejemplar/entities/ejemplar.entity';
   providers: [RevistaService],
   imports: [
     ConfigModule,
-    TypeOrmModule.forFeature([Revista])
+    TypeOrmModule.forFeature([Revista, Periodista])
   ],
   exports: [ RevistaService,
               TypeOrmModule ]
