@@ -2,24 +2,29 @@ import { BadRequestException, Injectable, InternalServerErrorException } from '@
 import { CreateRevistaDto } from './dto/create-revista.dto';
 import { UpdateRevistaDto } from './dto/update-revista.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Revista} from './entities/revista.entity';
 import { Periodista } from '../periodista/entities/periodista.entity';
 import { SeccionService } from '../seccion/seccion.service';
 import { EjemplarService } from '../ejemplar/ejemplar.service';
+import { PeriodistaService } from '../periodista/periodista.service';
 
 @Injectable()
 export class RevistaService {
 
   constructor(
+    private readonly dataSource: DataSource,
     @InjectRepository(Revista)
-    private readonly revistaRepository: Repository<Revista>
+    private readonly revistaRepository: Repository<Revista>,
+    private readonly periodistaService: PeriodistaService,
     ) {}
 
   async create(createRevistaDto: CreateRevistaDto) {
     try {
-      const { ...campos } = createRevistaDto;
-      const revista = this.revistaRepository.create({ ...campos});
+      const {  periodista_id, ...campos } = createRevistaDto;
+      const revista = this.revistaRepository.create({ ...campos });
+            revista.periodistarel = await this.periodistaService.getId(periodista_id);
+            await this.revistaRepository.save(revista);
       await this.revistaRepository.save(revista);
       return (revista);
       
@@ -29,31 +34,32 @@ export class RevistaService {
     }
   }
 
-  findOne(regnum: number) {
+  findOne(id: number) {
     return this.revistaRepository.findOne({
       where: { 
-        regnum
+        id
       },
       relations: {
           seccionrel: true,
           ejemplarrel: true,
+          periodistarel: true,
       }
     });
   }
 
-  getId(regnum: number) {
+  getId(id: number) {
     return this.revistaRepository.findOne({
       where: { 
-        regnum
+        id
     },
      });
   
   }
 
-  getRevistaId(regnum: number) {
+  getRevistaId(id: number) {
     return this.revistaRepository.findOne({
       where: { 
-        regnum
+        id
     },
      });
   
