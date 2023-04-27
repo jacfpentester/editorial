@@ -5,10 +5,10 @@ export class CreateRevistaDto {
      @IsNumber()
      regnum:number;
     
-    // @IsArray()
-    // @IsString({ each: true })
-    // @IsOptional()
-    // periodistarel?: string[];
+    @IsArray()
+    @IsString({ each: true })
+    @IsOptional()
+    periodistarel?: string[];
 
     // @IsArray()
     // @IsString({ each: true })
@@ -28,6 +28,7 @@ export class CreateRevistaDto {
 
     @IsString()
     periodicidad:string;  
+
     
     // @IsString()
     // seccionID?: string;

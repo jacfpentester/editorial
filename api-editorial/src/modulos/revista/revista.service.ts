@@ -19,8 +19,7 @@ export class RevistaService {
   async create(createRevistaDto: CreateRevistaDto) {
     try {
       const { ...campos } = createRevistaDto;
-      const revista = this.revistaRepository.create({
-        ...campos});
+      const revista = this.revistaRepository.create({ ...campos});
       await this.revistaRepository.save(revista);
       return (revista);
       

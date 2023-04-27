@@ -33,18 +33,19 @@ export class Revista {
     )
     seccionrel: Seccion[];
 
-    // @ManyToMany(
-    // () => Periodista,
-    // (periodista) => periodista.revistarel)
-    // // @JoinTable({
-    // //     name: 'revista_periodista',
-    // //     joinColumn: {
-    // //         name: 'revista_id',
-    // //     },
-    // //     inverseJoinColumn: {
-    // //         name: 'periodista_id',
-    // //     },
-    // // })
-    // @JoinTable()
-    // periodistarel?: Periodista[];
+    @ManyToMany(
+    () => Periodista,
+    (periodista) => periodista.revistarel,
+    { cascade: true, eager: true  } )
+    // @JoinTable({
+    //     name: 'revista_periodista',
+    //     joinColumn: {
+    //         name: 'revista_id',
+    //     },
+    //     inverseJoinColumn: {
+    //         name: 'periodista_id',
+    //     },
+    // })
+    @JoinTable()
+    periodistarel?: Periodista[];
 }

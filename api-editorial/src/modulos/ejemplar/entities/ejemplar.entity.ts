@@ -24,6 +24,5 @@ export class Ejemplar {
         )
         @JoinColumn({ name: 'revista_id'})
         revistarel?: Revista;
-  //ejemplar: Revista;
 
 }

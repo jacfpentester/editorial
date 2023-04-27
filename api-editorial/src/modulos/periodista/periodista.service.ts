@@ -18,14 +18,14 @@ export class PeriodistaService {
  
   async create(createPeriodistaDto: CreatePeriodistaDto) {
     try {
-      // const { regnum, ...data } = createPeriodistaDto;
-      // const periodista = this.periodistaRepository.create({ ...data });
-      // periodista.revistarel = await this.revistaService.getRevistaId(regnum);
-      // await this.periodistaRepository.save(periodista);
-      // return (periodista);
-      const periodista = this.periodistaRepository.create(createPeriodistaDto);
+      const { regnum, ...data } = createPeriodistaDto;
+      const periodista = this.periodistaRepository.create({ ...data });
+      periodista.revistarel = await this.revistaService.getRevistaId(regnum);
       await this.periodistaRepository.save(periodista);
       return (periodista);
+      // const periodista = this.periodistaRepository.create(createPeriodistaDto);
+      // await this.periodistaRepository.save(periodista);
+      // return (periodista);
     }catch (error) {
       this.handleDBErrors(error)
     }

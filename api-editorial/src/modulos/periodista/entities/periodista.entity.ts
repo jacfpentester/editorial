@@ -22,9 +22,10 @@ export class Periodista{
     @Column('integer')
     telefono: number;
 
-//     @ManyToMany(
-//     () => Revista, 
-//     (revista) => revista.periodistarel,
-//     {  onDelete: 'CASCADE' } )
-//     revistarel: Revista[];
+    @ManyToMany(
+    () => Revista, 
+    (revista) => revista.periodistarel,
+    {  onDelete: 'CASCADE' } )
+    revistarel: Revista[];
+  periodista: Revista;
 }
