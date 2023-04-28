@@ -20,7 +20,7 @@ export class PeriodistaService {
     try {
       const { regnum, ...data } = createPeriodistaDto;
       const periodista = this.periodistaRepository.create({ ...data });
-      periodista.revistarel = await this.revistaService.getRevistaId(regnum);
+      //periodista.revistarel = await this.revistaService.getRevistaId(regnum);
       await this.periodistaRepository.save(periodista);
       return (periodista);
       // const periodista = this.periodistaRepository.create(createPeriodistaDto);

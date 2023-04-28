@@ -27,7 +27,7 @@ import { PeriodistaModule } from './modulos/periodista/periodista.module';
   EjemplarModule,
   SeccionModule,
   RevistaModule,
-  //PeriodistaModule,
+  PeriodistaModule,
   ]
 })
 export class AppModule {}
